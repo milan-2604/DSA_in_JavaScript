@@ -44,7 +44,7 @@ class DoublyLinkedList{
 
         }
         this.length--;
-    return removedNode;
+    return removedNode.value;
     }
 
     //unshift() adding item at the front of the list
@@ -76,7 +76,7 @@ class DoublyLinkedList{
             removedNode.next=null;
         }
         this.length--;
-        return removedNode;
+        return removedNode.value;
     }
 
     //print() printing the list
