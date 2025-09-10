@@ -28,7 +28,7 @@ const isValidParenthesis = (str)=>{
     };
     for(let char of str ){
         if(data[char]){
-            stack.push(data[char]);
+            stack.push(data[char]); 
         }else{
             if(stack.pop()!==char){
                 return false
