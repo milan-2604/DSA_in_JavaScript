@@ -1,0 +1,1 @@
+newStack.min()
