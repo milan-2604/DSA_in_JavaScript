@@ -48,6 +48,20 @@ class Bst {
         }
         return false;
     }
+    bfs(){
+        if(!this.root) return [];
+        let current = this.root;
+        const queue = [];
+        const data = [];
+        queue.push(current);
+        while(queue.length){
+            current = queue.shift();
+            data.push(current.value);
+            if(current.left) queue.push(current.left);
+            if(current.right) queue.push(current.right);
+        }
+        return data;
+    }
 }
 
 const bst = new Bst();
@@ -59,3 +73,4 @@ bst.add(3);
 bst.add(1);
 bst.add(2);
 console.log(bst.contains(3))
+console.log(bst.bfs())
