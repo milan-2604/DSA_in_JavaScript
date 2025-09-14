@@ -73,6 +73,17 @@ class Bst {
         traverse(this.root);//calling traverse starting with the root
         return data;
     }
+    dfsPostOrder(){
+        const data = [];
+        function traverse(node){
+            if(!node) return;
+            traverse(node.left);//traverse to left
+            traverse(node.right);//traverse to right
+            data.push(node.value);//push the value
+        }
+        traverse(this.root);
+        return data;
+    }
 }
 
 const bst = new Bst();
@@ -86,3 +97,4 @@ bst.add(2);
 console.log(bst.contains(3))
 console.log(bst.bfs())
 console.log(bst.dfsPreorder())
+console.log(bst.dfsPostOrder())
