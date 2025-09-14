@@ -62,6 +62,17 @@ class Bst {
         }
         return data;
     }
+    dfsPreorder(){
+        const data = [];
+        function traverse(node){
+            if(!node) return;//base case if node doesnt exist return
+            data.push(node.value)//push the current node value
+            traverse(node.left);//traverse to every left node first and pushes their value in data until left node doesnt exist anymore
+            traverse(node.right);//after every left node is already pushed this starts and push every right node that exist in the data
+        }
+        traverse(this.root);//calling traverse starting with the root
+        return data;
+    }
 }
 
 const bst = new Bst();
@@ -74,3 +85,4 @@ bst.add(1);
 bst.add(2);
 console.log(bst.contains(3))
 console.log(bst.bfs())
+console.log(bst.dfsPreorder())
