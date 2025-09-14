@@ -76,13 +76,24 @@ class Bst {
     dfsPostOrder(){
         const data = [];
         function traverse(node){
-            if(!node) return;
-            traverse(node.left);//traverse to left
-            traverse(node.right);//traverse to right
-            data.push(node.value);//push the value
+            if(!node) return;//base case when node doesnt exist
+            traverse(node.left);//traverse to left subtree
+            traverse(node.right);//traverse to right subtree
+            data.push(node.value);//push the curret root value
         }
         traverse(this.root);
         return data;
+    }
+    dfsInorder(){
+        const data = [];
+        function traverse(node){
+            if(!node) return;//base case when node dosent exist
+            traverse(node.left);//traverse to left subtree
+            data.push(node.value);//push the current root value
+            traverse(node.right);//traverse to right subtree
+        }
+        traverse(this.root);
+        return data; 
     }
 }
 
@@ -98,3 +109,4 @@ console.log(bst.contains(3))
 console.log(bst.bfs())
 console.log(bst.dfsPreorder())
 console.log(bst.dfsPostOrder())
+console.log(bst.dfsInorder( ))
