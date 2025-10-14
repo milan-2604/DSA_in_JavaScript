@@ -23,3 +23,21 @@ function merge(left,right){
     return result.concat(left.slice(i)).concat(right.slice(j));
 }
 console.log(MergeSort([2,45,3,5,6,2,]))
+
+/*
+
+                merge_sort([8, 4, 5, 2])
+                │
+                ├── merge_sort([8, 4])
+                │   ├── merge_sort([8]) → [8]
+                │   └── merge_sort([4]) → [4]
+                │   → merge([8], [4]) → [4, 8]
+                │
+                └── merge_sort([5, 2])
+                    ├── merge_sort([5]) → [5]
+                    └── merge_sort([2]) → [2]
+                    → merge([5], [2]) → [2, 5]
+
+                → merge([4, 8], [2, 5]) → [2, 4, 5, 8]
+
+*/
