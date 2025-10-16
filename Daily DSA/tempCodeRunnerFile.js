@@ -1,1 +1,1 @@
-console.log(hasIncreasingSubarrays([1,2,3,4,4,4,4,5,6,7],5))
+console.log(Mex([1,-10,7,13,6,8]))
