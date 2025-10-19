@@ -48,5 +48,5 @@ var searchInsert = function(nums, target) {
     
     return l;
 };
-
+// When binary search ends, l is the smallest index where target could go without breaking the sort.
 console.log(searchInsert([1,3,5,6],5))
