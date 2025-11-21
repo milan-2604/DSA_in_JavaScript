@@ -36,5 +36,25 @@ s and p consist of lowercase English letters.
  * @return {number[]}
  */
 var findAnagrams = function(s, p) {
-    
+    let result = [];
+    if(s.length<p.length) return result;
+    let pCount = Array(26).fill(0);
+    let sCount = Array(26).fill(0);
+    const getIndex = (char)=> char.charCodeAt(0) - 'a'.charCodeAt(0);
+    for(let char of p){
+        pCount[getIndex(char)]++;
+    }
+    const windowSize = p.length;
+    for(let i=0; i<s.length; i++){
+        sCount[getIndex(s[i])]++;
+        if(i>=windowSize){
+            sCount[getIndex(s[i-windowSize])]--;
+        }
+        if(i>=windowSize-1){
+            if(sCount.toString()===pCount.toString()){
+                result.push(i-windowSize+1);
+            }
+        }
+    }
+    return result;
 };
