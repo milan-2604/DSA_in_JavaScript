@@ -66,10 +66,10 @@ var maximumSubarraySum = function (nums, k) {
       }
       left++;
     }
-    if(right-left+1===k){
-        if(freq.size===k){
-            max = Math.max(currSum,max);
-        }
+    if (right - left + 1 === k) {
+      if (freq.size === k) {
+        max = Math.max(currSum, max);
+      }
     }
   }
   return max;
