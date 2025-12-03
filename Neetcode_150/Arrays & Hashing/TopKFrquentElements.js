@@ -44,13 +44,33 @@ Follow up: Your algorithm's time complexity must be better than O(n log n), wher
  * @return {number[]}
  */
 var topKFrequent = function (nums, k) {
+  //   const freq = new Map();
+  //   for (const num of nums) {
+  //     freq.set(num, (freq.get(num) || 0) + 1);
+  //   }
+  //   const sortedFreq = new Map([...freq.entries()].sort((a,b)=>b[1]-a[1]));
+  //   return [...sortedFreq.keys()].slice(0,k);
+
+  //More optimal Solution using bucket sort–like approach
   const freq = new Map();
-  for (const num of nums) {
-    freq.set(num, (freq.get(num) || 0) + 1);
+  for(const num of nums){
+    freq.set(num,(freq.get(num)||0) + 1);
   }
-  const sortedFreq = new Map([...freq.entries()].sort((a,b)=>b[1]-a[1]));
-  return [...sortedFreq.keys()].slice(0,k);
+  //create bucket
+  const buckets = Array(nums.length+1).fill(null).map(()=>[]);
+  //filling up buckets take values as index 
+  for(const [num,count] of freq.entries()){
+    buckets[count].push(num);
+  }
+  const result = [];
+  for(let i=buckets.length-1; i>=0 && result.length<k; i--){
+    for(const num of buckets[i]){
+        result.push(num);
+        if(result.length===k) break;
+    }
+  }
+  return result;
 };
-console.log(topKFrequent([1,1,1,2,2,3],2));
-console.log(topKFrequent([1],1));
-console.log(topKFrequent([1,2,1,2,1,2,3,1,3,2],2));
+console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
+console.log(topKFrequent([1], 1));
+console.log(topKFrequent([1, 2, 1, 2, 1, 2, 3, 1, 3, 2], 2));
