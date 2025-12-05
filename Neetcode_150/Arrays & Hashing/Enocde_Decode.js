@@ -35,7 +35,6 @@ class Solution {
         }
         return code;
     }
-
     /**
      * @param {string} str
      * @returns {string[]}
