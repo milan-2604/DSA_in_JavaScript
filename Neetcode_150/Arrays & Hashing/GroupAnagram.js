@@ -45,14 +45,30 @@ strs[i] consists of lowercase English letters.
  * @return {string[][]}
  */
 var groupAnagrams = function (strs) {
-  const map = new Map();
-  for (const char of strs) {
-    const sorted = char.split("").sort().join("");
-    if (map.has(sorted)) {
-      map.get(sorted).push(char);
-    } else {
-      map.set(sorted, [char]);
+  // const map = new Map();
+  // for (const char of strs) {
+  //   const sorted = char.split("").sort().join("");
+  //   if (map.has(sorted)) {
+  //     map.get(sorted).push(char);
+  //   } else {
+  //     map.set(sorted, [char]);
+  //   }
+  // }
+  // return [...map.values()];
+
+   //without sorting
+    const map = new Map();
+    for(const str of strs){
+        const count = new Array(26).fill(0);
+        for(const c of str){
+            count[c.charCodeAt(0)-97]++;
+        }
+        const key = count.join(",");
+        if(map.has(key)){
+            map.get(key).push(str);
+        }else{
+            map.set(key,[str]);
+        }
     }
-  }
-  return [...map.values()];
+    return Array.from(map.values());
 };
