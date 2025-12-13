@@ -32,26 +32,45 @@ n == height.length
  * @return {number}
  */
 var trap = function (height) {
-  let leftMax = [];
-  let prefix = 0;
-  for (let i = 0; i < height.length; i++) {
-    prefix = Math.max(prefix, height[i]);
-    leftMax.push(prefix);
+  // let leftMax = [];
+  // let prefix = 0;
+  // for (let i = 0; i < height.length; i++) {
+  //   prefix = Math.max(prefix, height[i]);
+  //   leftMax.push(prefix);
+  // }
+  // let rightMax = new Array(height.length).fill(0);
+  // let suffix = 0;
+  // for (let i = height.length - 1; i >= 0; i--) {
+  //   suffix = Math.max(suffix, height[i]);
+  //   rightMax[i] = suffix;
+  // }
+  // let min = [];
+  // for (let i = 0; i < height.length; i++) {
+  //   min.push(Math.min(leftMax[i], rightMax[i]));
+  // }
+  // let total = 0;
+  // for (let i = 0; i < height.length; i++) {
+  //   const water = min[i] - height[i];
+  //   if (water >= 0) total += water;
+  // }
+  // return total;
+
+  //two pointers
+  let l = 0,
+    r = height.length - 1;
+  let leftMax = height[l],
+    rightMax = height[r];
+  let res = 0;
+  while (l < r) {
+    if (leftMax < rightMax) {
+      l++;
+      leftMax = Math.max(leftMax, height[l]);
+      res += leftMax - height[l];
+    } else {
+      r--;
+      rightMax = Math.max(rightMax, height[r]);
+      res += rightMax - height[r];
+    }
   }
-  let rightMax = new Array(height.length).fill(0);
-  let suffix = 0;
-  for (let i = height.length - 1; i >= 0; i--) {
-    suffix = Math.max(suffix, height[i]);
-    rightMax[i] = suffix;
-  }
-  let min = [];
-  for (let i = 0; i < height.length; i++) {
-    min.push(Math.min(leftMax[i], rightMax[i]));
-  }
-  let total = 0;
-  for (let i = 0; i < height.length; i++) {
-    const water = min[i] - height[i];
-    if (water >= 0) total += water;
-  }
-  return total;
+  return res;
 };
