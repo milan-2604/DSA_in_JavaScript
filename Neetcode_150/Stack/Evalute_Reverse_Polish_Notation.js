@@ -69,3 +69,4 @@ var evalRPN = function (tokens) {
   }
   return parseInt(tokens[0]);
 };
+console.log(evalRPN(["1", "2", "+", "3", "*", "4", "-"]));
