@@ -52,21 +52,40 @@ tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the ran
  * @return {number}
  */
 var evalRPN = function (tokens) {
-  while (tokens.length > 1) {
-    for (let i = 0; i < tokens.length; i++) {
-      if ("+-*/".includes(tokens[i])) {
-        const a = parseInt(tokens[i - 2]);
-        const b = parseInt(tokens[i - 1]);
-        let result = 0;
-        if (tokens[i] === "+") result = a + b;
-        else if (tokens[i] === "-") result = a - b;
-        else if (tokens[i] === "*") result = a * b;
-        else if (tokens[i] === "/") result = Math.trunc(a / b);
-        tokens.splice(i - 2, 3, result.toString());
-        break;
-      }
+  // while (tokens.length > 1) {
+  //   for (let i = 0; i < tokens.length; i++) {
+  //     if ("+-*/".includes(tokens[i])) {
+  //       const a = parseInt(tokens[i - 2]);
+  //       const b = parseInt(tokens[i - 1]);
+  //       let result = 0;
+  //       if (tokens[i] === "+") result = a + b;
+  //       else if (tokens[i] === "-") result = a - b;
+  //       else if (tokens[i] === "*") result = a * b;
+  //       else if (tokens[i] === "/") result = Math.trunc(a / b);
+  //       tokens.splice(i - 2, 3, result.toString());
+  //       break;
+  //     }
+  //   }
+  // }
+  // return parseInt(tokens[0]);
+  let stack = [];
+  for (const c of tokens) {
+    if (c === "+") {
+      stack.push(stack.pop() + stack.pop());
+    } else if (c === "-") {
+      const a = stack.pop();
+      const b = stack.pop();
+      stack.push(b - a);
+    } else if (c === "*") {
+      stack.push(stack.pop() * stack.pop());
+    } else if (c === "/") {
+      const a = stack.pop();
+      const b = stack.pop();
+      stack.push(Math.trunc(b / a));
+    } else {
+      stack.push(parseInt(c));
     }
   }
-  return parseInt(tokens[0]);
+  return stack.pop();
 };
 console.log(evalRPN(["1", "2", "+", "3", "*", "4", "-"]));
